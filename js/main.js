@@ -6,6 +6,7 @@ var svg = d3.select("#svg-voronoi-interactive").on("click", step),
     total = (width / xStep) * (height / yStep),
     iterations = 20;
 
+console.log(total);
 
 var voronoi = d3.voronoi()
     .extent([[0, 0], [width, height]]);
