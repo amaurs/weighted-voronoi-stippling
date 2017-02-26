@@ -1,34 +1,36 @@
-var total = 2500;
+var svg = d3.select("#svg-voronoi-interactive").on("click", step),
+    width = svg.attr("width"),
+    height = svg.attr("height"),
+    xStep = 16,
+    yStep = 16,
+    total = (width / xStep) * (height / yStep),
+    iterations = 20;
 
-var svg = d3.select("svg").on("click", moved),
-    width = + svg.attr("width"),
-    height = + svg.attr("height");
 
 var voronoi = d3.voronoi()
-    .extent([[-1, -1], [width + 1, height + 1]]);
+    .extent([[0, 0], [width, height]]);
 
 var polygon;
 var link;
 var site;
 
-var canvas = d3.select("body").append("canvas")
-    .attr("width", width)
-    .attr("height", height);
-var context = canvas.node().getContext("2d");
+
 var image = new Image();
 var numPoints = 0;
-var myPoints = [];
-var first = true;
-var lines = false;
+var sites = [];
+var cells;
+var links;
+var diagram;
+var showGrid = true;
 var imageData;
 
 
 document.getElementById("toggle").onclick = function(){
-    lines = lines?false:true;
+    showGrid = showGrid ? false : true;
     redraw();
 };
 
 
 image.crossOrigin="Anonymous";
-image.src = "images/robot-square.jpg";
-image.onload = callback;
+image.src = "images/robot-square-small.jpg";
+image.onload = onImageLoad;

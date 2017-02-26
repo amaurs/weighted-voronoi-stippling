@@ -1,0 +1,28 @@
+.links 
+{
+  stroke-opacity: 0.2;
+  stroke: #000;
+}
+
+.polygons 
+{
+  fill: none;
+  stroke: #000;
+}
+
+.sites 
+{
+  fill: #000;
+  
+}
+
+.images-container
+{
+    width:964px;
+    display:inline-block
+}
+
+.svg-robot
+{
+    background-color: white;
+}

@@ -2,15 +2,32 @@
 <html>
 <head>
     <title>amaurs</title>
+    <link href="style/style.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
-    <div id="content">
-        <h1>Wheighted Voronoi Stipples</h1>
+    <div class="images-container" id="content">
+        <h1>Weighted Voronoi Stipples</h1>
         <p>Pointillism is the process of representing the tone of an image by drawing carefully selected points.    Using the Weighed Voronoi Stiplling algorithm, proposed by Adrian Secord in 2001, points can be placed in  order to give a more pleasing effect than with a regular grid.</p>
-        <div id="robot">
-            <button id="toggle" type="button">Toggle</button>
-            <svg width="1080" height="1080"></svg>
+        <div>
+            <div class="images-container" id="robot-regular">
+                <svg class="svg-robot" id="svg-regular" width="480" height="480"></svg>
+            </div>
+            <div class="images-container" id="robot-rejection">
+                <svg class="svg-robot" id="svg-rejection" width="480" height="480"></svg>
+            </div>
+            <div class="images-container" id="robot-voronoi">
+                <svg class="svg-robot" id="svg-voronoi" width="480" height="480"></svg>
+            </div>
         </div>
+        <div id="robot-interactive">
+            <div class="images-container"></div>
+                <button id="toggle" type="button">Toggle</button>
+            </div>
+            <div class="images-container" id="robot-images">
+                <svg class="svg-robot" id="svg-voronoi-interactive" width="480" height="480"></svg>
+            </div>
+        </div>
+
         <script src="bower_components/d3/d3.js"></script>
         <script src="js/util.js"></script>
         <script src="js/main.js"></script>
