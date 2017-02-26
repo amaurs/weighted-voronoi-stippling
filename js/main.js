@@ -1,13 +1,9 @@
-var svg = d3.select("#svg-voronoi-interactive").on("click", step),
-    width = svg.attr("width"),
-    height = svg.attr("height"),
+var width = 480,
+    height = 480,
     xStep = 16,
     yStep = 16,
     total = (width / xStep) * (height / yStep),
     iterations = 20;
-
-console.log(total);
-
 var voronoi = d3.voronoi()
     .extent([[0, 0], [width, height]]);
 
@@ -19,6 +15,7 @@ var site;
 var image = new Image();
 var numPoints = 0;
 var sites = [];
+var originalRejection;
 var cells;
 var links;
 var diagram;
@@ -28,6 +25,15 @@ var imageData;
 
 document.getElementById("toggle").onclick = function(){
     showGrid = showGrid ? false : true;
+
+    document.getElementById("toggle").innerHTML = showGrid ? "Hide Grid" : "Show Grid";
+    initInteractive();
+    redraw();
+};
+
+document.getElementById("restart").onclick = function(){
+    sites = originalRejection;
+    initInteractive();
     redraw();
 };
 

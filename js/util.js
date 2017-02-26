@@ -30,41 +30,15 @@ function onImageLoad(){
             numPoints++;
         }
     }
-
-
-
     for(var i = xStep / 2; i < width; i+=xStep){
         for(var j = yStep / 2; j < width; j+=yStep){
             regular.push([i, j]);
         }
     }
+    var rejectionSites = sites.slice();
+    originalRejection = sites.slice();
 
-    var rejectionSites = sites.slice();;
-
-    diagram = voronoi(sites);
-
-    cells = diagram.polygons();
-    links = diagram.links();
-
-    polygon = svg.append("g")
-      .attr("class", "polygons")
-      .selectAll("path")
-      .data(cells)
-      .enter().append("path")
-      .call(redrawPolygon);
-    link = svg.append("g")
-      .attr("class", "links")
-      .selectAll("line")
-      .data(links)
-      .enter().append("line")
-      .call(redrawLink);
-    site = svg.append("g")
-      .attr("class", "sites")
-      .selectAll("circle")
-      .data(sites)
-      .enter().append("circle")
-      .call(redrawSite);
-
+    initInteractive();
 
 
     var svgRegular = d3.select("#svg-regular");
@@ -101,6 +75,33 @@ function onImageLoad(){
 
 }
 
+function initInteractive(){
+    var svg = d3.select("#svg-voronoi-interactive").on("click", step);
+    svg.selectAll("*").remove();
+    diagram = voronoi(sites);
+    cells = diagram.polygons();
+    links = diagram.links();
+
+    polygon = svg.append("g")
+      .attr("class", "polygons")
+      .selectAll("path")
+      .data(cells)
+      .enter().append("path")
+      .call(redrawPolygon);
+    link = svg.append("g")
+      .attr("class", "links")
+      .selectAll("line")
+      .data(links)
+      .enter().append("line")
+      .call(redrawLink);
+    site = svg.append("g")
+      .attr("class", "sites")
+      .selectAll("circle")
+      .data(sites)
+      .enter().append("circle")
+      .call(redrawSite);
+}
+
 function getColor(x,y){
     var i = (y * width + x) << 2;
     return d3.rgb(imageData.data[i + 0], imageData.data[i + 1], imageData.data[i + 2])
@@ -118,7 +119,7 @@ function toRadians(deg) {
 }
 
 function getBrightness(red, green, blue){
-    return (red / 255.0) * 0.3 + (green / 255.0) * 0.59 + (blue / 255.0) * 0.11; 
+    return (red * 0.3 + green * 0.59 + blue * 0.11) / 255.0; 
 }
 
 function getBrightnessFromXY(x,y){
