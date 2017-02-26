@@ -119,7 +119,7 @@ function redraw() {
 function redrawPolygon(polygon){
     polygon
         .attr("d", function(d){ return d ? "M" + d.join("L") + "Z" : null;})
-        .style("stroke", function(d) { return lines ? "black" : "white";});
+        .style("display", function(d) { return lines ? "inline" : "none";});
 }
 
 function redrawLink(link){
@@ -128,7 +128,7 @@ function redrawLink(link){
         .attr("y1", function(d){ return d.source[1];})
         .attr("x2", function(d){ return d.target[0];})
         .attr("y2", function(d){ return d.target[1];})
-        .style("stroke", function(d) { return lines ? "black" : "white";});
+        .style("display", function(d) { return lines ? "inline" : "none";});
 }
 
 function redrawSite(site){

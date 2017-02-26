@@ -25,7 +25,7 @@ var imageData;
 
 document.getElementById("toggle").onclick = function(){
     lines = lines?false:true;
-    console.log(lines);
+    redraw();
 };
 
 
